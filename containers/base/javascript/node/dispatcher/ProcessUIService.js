@@ -567,6 +567,12 @@ _p._authorizeExecute = function(socket, sessionId, commandData) {
     authorizedRolesRequest.setSessionId(sessionId);
     authorizedRolesRequest.setRepoNameWithOwner(processState.repoNameWithOwner);
 
+    // requester + eventually a list of equally authorized people (e.g. when
+    // we add a database to manage sources, we can have a list of people
+    // who are authorized to work the processes initialized with that source.
+    // Also, via a form it could be possible to add more names to the process
+    // directly.
+
     // This will also check if sessionId is valid!
     return this._ghAuthClient.getRoles(authorizedRolesRequest)
     .then(authorizedRoles=>{
